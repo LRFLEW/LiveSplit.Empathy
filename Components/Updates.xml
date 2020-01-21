@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<updates>
+  <update version="1.0.0">
+    <files>
+      <file path="2dd2f1a0cc6d158df56b35a78b048d97451169de/Components/LiveSplit.Empathy.dll" status="changed"/>
+    </files>
+    <changelog>
+      <change>Pauses the Game Timer During Map Loads</change>
+	  <change>Starts the timer with the opening cutscene</change>
+	  <change>Finishes the time with the ending cutscene</change>
+	  <change>Can Split on the map transition (between Acts 2 and 3)</changes>
+	  <change>Can reset the timer with the opening cutscene</change>
+    </changelog>
+  </update>
+</updates>
