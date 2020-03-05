@@ -9,9 +9,10 @@ namespace LiveSplit.Empathy
     public partial class Settings : UserControl
     {
         public bool AutoStart { get; private set; } = true;
-        public bool AutoMiddle { get; private set; } = true;
         public bool AutoEnd { get; private set; } = true;
-        public bool AutoReset { get; private set; } = false;
+        public bool AutoSplit { get; private set; } = true;
+        public bool AutoMiddle { get; private set; } = true;
+        public bool AutoReset { get; private set; } = true;
 
         public Settings()
         {
@@ -26,6 +27,11 @@ namespace LiveSplit.Empathy
         private void AutoEndBox_CheckedChanged(object sender, EventArgs e)
         {
             AutoEnd = AutoEndBox.Checked;
+        }
+
+        private void AutoSplitBox_CheckedChanged(object sender, EventArgs e)
+        {
+            AutoMiddle = AutoMidBox.Checked;
         }
 
         private void AutoMidBox_CheckedChanged(object sender, EventArgs e)
@@ -45,6 +51,7 @@ namespace LiveSplit.Empathy
             settingsNode.AppendChild(SettingsHelper.ToElement(document, "Version", Assembly.GetExecutingAssembly().GetName().Version.ToString(3)));
             settingsNode.AppendChild(SettingsHelper.ToElement(document, "AutoStart", AutoStart));
             settingsNode.AppendChild(SettingsHelper.ToElement(document, "AutoEnd", AutoEnd));
+            settingsNode.AppendChild(SettingsHelper.ToElement(document, "AutoSplit", AutoSplit));
             settingsNode.AppendChild(SettingsHelper.ToElement(document, "AutoMiddle", AutoMiddle));
             settingsNode.AppendChild(SettingsHelper.ToElement(document, "AutoReset", AutoReset));
 
@@ -57,11 +64,13 @@ namespace LiveSplit.Empathy
 
             AutoStart = SettingsHelper.ParseBool(settings["AutoStart"], true);
             AutoEnd = SettingsHelper.ParseBool(settings["AutoEnd"], true);
+            AutoSplit = SettingsHelper.ParseBool(settings["AutoSplit"], true);
             AutoMiddle = SettingsHelper.ParseBool(settings["AutoMiddle"], true);
-            AutoReset = SettingsHelper.ParseBool(settings["AutoReset"], false);
+            AutoReset = SettingsHelper.ParseBool(settings["AutoReset"], true);
 
             AutoStartBox.Checked = AutoStart;
             AutoEndBox.Checked = AutoEnd;
+            AutoSplitBox.Checked = AutoSplit;
             AutoMidBox.Checked = AutoMiddle;
             AutoResetBox.Checked = AutoReset;
         }

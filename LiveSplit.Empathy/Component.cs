@@ -13,6 +13,7 @@ namespace LiveSplit.Empathy
 
         TimerModel _timer;
         LiveSplitState _state;
+        bool _starting = false;
 
         Hooks _hooks;
         Settings _settings = new Settings();
@@ -31,7 +32,10 @@ namespace LiveSplit.Empathy
 
         public void On_Loading(bool loading)
         {
-            _state.IsGameTimePaused = loading;
+            if (!_starting)
+            {
+                _state.IsGameTimePaused = loading;
+            }
         }
 
         public void On_Start()
@@ -44,6 +48,14 @@ namespace LiveSplit.Empathy
             {
                 _timer.Start();
             }
+            _state.IsGameTimePaused = true;
+            _starting = true;
+        }
+
+        public void On_GameStart()
+        {
+            _starting = false;
+            _state.IsGameTimePaused = false;
         }
 
         public void On_End()
@@ -58,9 +70,17 @@ namespace LiveSplit.Empathy
             }
         }
 
-        public void On_Split()
+        public void On_MapSplit()
         {
             if (_state.CurrentPhase == TimerPhase.Running && _settings.AutoMiddle)
+            {
+                _timer.Split();
+            }
+        }
+
+        public void On_MemorySplit()
+        {
+            if (_state.CurrentPhase == TimerPhase.Running && _settings.AutoSplit)
             {
                 _timer.Split();
             }
