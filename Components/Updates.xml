@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <updates>
+  <update version="1.1.0">
+    <files>
+      <file path="e09555a82fcbce50b2e3402c2ff447f28f76bb26/Components/LiveSplit.Empathy.dll" status="changed"/>
+    </files>
+    <changelog>
+      <change>Can Split on the completion of memories</change>
+	  <change>Timer now starts on selecting new game, with game time starting with the opening cutscene</change>
+	  <change>Resetting the timer on a new game is enabled by default now</change>
+    </changelog>
+  </update>
   <update version="1.0.0">
     <files>
       <file path="2dd2f1a0cc6d158df56b35a78b048d97451169de/Components/LiveSplit.Empathy.dll" status="changed"/>
