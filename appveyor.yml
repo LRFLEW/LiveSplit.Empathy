@@ -1,0 +1,18 @@
+version: 1.1.0#{build}
+image: Visual Studio 2019
+configuration: Release
+environment:
+  livesplit_ver: 1.7.7
+install:
+- ps: >-
+    Invoke-WebRequest "https://github.com/LiveSplit/LiveSplit/releases/download/${env:livesplit_ver}/LiveSplit_${env:livesplit_ver}.zip" -OutFile LiveSplit.zip
+
+    7z e LiveSplit.zip -oLiveSplit\
+
+    Remove-Item LiveSplit.zip
+build:
+  project: LiveSplit.Empathy.sln
+  verbosity: minimal
+artifacts:
+- path: LiveSplit.Empathy/bin/Release/*
+  name: Build Results
